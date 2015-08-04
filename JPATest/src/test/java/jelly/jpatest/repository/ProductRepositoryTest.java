@@ -1,9 +1,10 @@
-package net.g1project.jpatest.repository;
+package jelly.jpatest.repository;
 
 import java.util.List;
 
-import net.g1project.jpatest.config.JpaConfiguration;
-import net.g1project.jpatest.entity.Product;
+import jelly.jpatest.config.JpaConfiguration;
+import jelly.jpatest.entity.Product;
+import jelly.jpatest.repository.ProductRepository;
 
 import org.junit.Assert;
 import org.junit.Test;

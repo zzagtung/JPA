@@ -1,4 +1,4 @@
-package net.g1project.jpatest.config;
+package jelly.jpatest.config;
 
 import java.util.Properties;
 
@@ -15,8 +15,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 @Configuration
-@EnableJpaRepositories(basePackages = "net.g1project.jpatest.repository") // jpa repository 패키지
-@ComponentScan(basePackages = "net.g1project.jpatest")
+@EnableJpaRepositories(basePackages = "jelly.jpatest.repository") // jpa repository 패키지
+@ComponentScan(basePackages = "jelly.jpatest")
 public class JpaConfiguration {
     
     // KSUG 2015 Modern Data Access for Enterprise Java - JPA
@@ -48,7 +48,7 @@ public class JpaConfiguration {
 
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
         factoryBean.setDataSource(dataSource());
-        factoryBean.setPackagesToScan("net.g1project.jpatest.entity"); // entity scan package
+        factoryBean.setPackagesToScan("jelly.jpatest"); // entity scan package
         factoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
 
         Properties jpaProperties = new Properties();

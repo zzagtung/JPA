@@ -1,6 +1,6 @@
-package net.g1project.jpatest.repository;
+package jelly.jpatest.repository;
 
-import net.g1project.jpatest.entity.Category;
+import jelly.jpatest.entity.Category;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

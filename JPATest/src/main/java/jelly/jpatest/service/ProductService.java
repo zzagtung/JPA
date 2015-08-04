@@ -1,13 +1,13 @@
-package net.g1project.jpatest.service;
+package jelly.jpatest.service;
 
 import javax.persistence.EntityManager;
 
-import net.g1project.jpatest.entity.Category;
-import net.g1project.jpatest.entity.Product;
-import net.g1project.jpatest.entity.QCategory;
-import net.g1project.jpatest.entity.QProduct;
-import net.g1project.jpatest.repository.CategoryRepository;
-import net.g1project.jpatest.repository.ProductRepository;
+import jelly.jpatest.entity.Category;
+import jelly.jpatest.entity.Product;
+import jelly.jpatest.entity.QCategory;
+import jelly.jpatest.entity.QProduct;
+import jelly.jpatest.repository.CategoryRepository;
+import jelly.jpatest.repository.ProductRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,9 @@
-package net.g1project.jpatest.service;
+package jelly.jpatest.service;
 
-import net.g1project.jpatest.config.JpaConfiguration;
-import net.g1project.jpatest.entity.Category;
-import net.g1project.jpatest.entity.Product;
+import jelly.jpatest.config.JpaConfiguration;
+import jelly.jpatest.entity.Category;
+import jelly.jpatest.entity.Product;
+import jelly.jpatest.service.ProductService;
 
 import org.junit.Assert;
 import org.junit.Test;
