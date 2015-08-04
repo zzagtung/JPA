@@ -3,7 +3,6 @@ package jelly.jpatest.service;
 import jelly.jpatest.config.JpaConfiguration;
 import jelly.jpatest.entity.Category;
 import jelly.jpatest.entity.Product;
-import jelly.jpatest.service.ProductService;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,7 +36,8 @@ public class ProductServiceTest {
         
         Product product = new Product();
         product.setName("product name 1");
-        product.setCategory(category);
+        //product.setCategory(category);
+        //영속성 Context에서 관리하고 있는 객체가 아님.
         
         productService.addProduct(product);
         
