@@ -5,7 +5,6 @@ import javax.persistence.EntityManager;
 import jelly.jpatest.entity.Category;
 import jelly.jpatest.entity.Product;
 import jelly.jpatest.entity.QCategory;
-import jelly.jpatest.entity.QProduct;
 import jelly.jpatest.repository.CategoryRepository;
 import jelly.jpatest.repository.ProductRepository;
 
@@ -70,8 +69,26 @@ public class ProductService {
         
         product.setCategory(category);
         
-        productRepository.save(product);
+        //save를 호출할 필요 없음
+        //save는 update가 아님
+        //productRepository.save(product);
         
+        // transaction이 commit()되는 시점에서 
+        // entity의 변화를 확인하고 자동으로 update가 실행됨
+        
+    }
+    
+    /**
+     * Category내부의 productList가 FetchType.LAZY로 동작하는지 확인
+     */
+    public Category getCategory(Long categoryId){
+    	
+    	Category category = categoryRepository.findOne(categoryId);
+    	
+    	// FetchType.LAZY 동작
+    	category.getProductList().size();
+    	
+    	return category;
     }
     
     /**
@@ -82,11 +99,13 @@ public class ProductService {
         // QueryDSL 사용
         
         QCategory c = QCategory.category;
-        QProduct p = QProduct.product;
+        //QProduct p = QProduct.product;
         
         JPAQuery query = new JPAQuery(entityManager);
         
-        return query.from(c).join(c.productList, p).fetch().where(c.id.eq(categoryId)).singleResult(c);
+        //return query.from(c).join(c.productList, p).fetch().where(c.id.eq(categoryId)).singleResult(c);
+        
+        return query.from(c).join(c.productList).fetch().where(c.id.eq(categoryId)).singleResult(c);
     }
     
     /**
@@ -99,14 +118,22 @@ public class ProductService {
         
     }
     
-    public void getProductTest(Long productId){
+    /**
+     * 동일한 key로 select된 두 객체의 비교
+     */
+    public void compareProduct(Long productId){
         
-        Long id = productId;
-        
-        Product product1 = productRepository.findOne(id);
-        Product product2 = productRepository.findOne(id);
+        Product product1 = productRepository.findOne(productId);
+        Product product2 = productRepository.findOne(productId);
         
         System.out.println("레알? " + (product1 == product2));
+        
+        // 아래의 조건문을 == 으로 대체 가능
+        if(product1 != null && product2 != null 
+        		&& product1.getId() != null 
+        		&& product1.getId().equals(product2.getId())){
+        	
+        }
         
     }
     

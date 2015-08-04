@@ -13,10 +13,12 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableJpaRepositories(basePackages = "jelly.jpatest.repository") // jpa repository 패키지
 @ComponentScan(basePackages = "jelly.jpatest")
+@EnableTransactionManagement
 public class JpaConfiguration {
     
     // KSUG 2015 Modern Data Access for Enterprise Java - JPA
@@ -26,7 +28,7 @@ public class JpaConfiguration {
     public DataSource dataSource() {
         // h2 database
         // http://www.h2database.com/html/download.html
-        // 실행 ~/h2/bin $ java -jar h2-1.3.176.jar
+        // 실행 bin/ java -jar h2-*.jar
         // Ctrl + c 하면 db 내려감
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.h2.Driver");
@@ -57,7 +59,7 @@ public class JpaConfiguration {
         jpaProperties.put(AvailableSettings.FORMAT_SQL, true);
         jpaProperties.put(AvailableSettings.USE_SQL_COMMENTS, true);
         jpaProperties.put(AvailableSettings.HBM2DDL_AUTO, "create"); // 기동 시 table drop and create
-        jpaProperties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.H2Dialect");
+        jpaProperties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.H2Dialect"); // h2에 맞는 sql이 실행됨
         jpaProperties.put(AvailableSettings.USE_NEW_ID_GENERATOR_MAPPINGS, "true");
 
         factoryBean.setJpaProperties(jpaProperties);

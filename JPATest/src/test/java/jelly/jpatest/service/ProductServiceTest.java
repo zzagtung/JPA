@@ -74,6 +74,33 @@ public class ProductServiceTest {
         
     }
 
+	@Test
+	public void testGetCategory() throws Exception {
+        
+        Category category = new Category();
+        category.setName("category 1");
+        productService.addCategory(category);
+        
+        Product product = new Product();
+        product.setName("product name 1");
+        productService.addProduct(product, category.getId());
+        
+        Product product2 = new Product();
+        product2.setName("product name 2");
+        productService.addProduct(product2, category.getId());
+        
+        Category categoryProduct = productService.getCategory(category.getId());
+        
+        try{
+        	Assert.assertNotNull(categoryProduct);
+            Assert.assertNotNull(categoryProduct.getProductList());
+            Assert.assertEquals(2, categoryProduct.getProductList().size());
+        } catch (Exception e){
+        	e.printStackTrace();
+        }
+		
+	}
+
     @Test
     public void testGetCategoryProduct() throws Exception {
         
@@ -83,14 +110,11 @@ public class ProductServiceTest {
         
         Product product = new Product();
         product.setName("product name 1");
-        productService.addProduct(product);
+        productService.addProduct(product, category.getId());
         
         Product product2 = new Product();
         product2.setName("product name 2");
-        productService.addProduct(product2);
-        
-        productService.addMapping(product.getId(), category.getId());
-        productService.addMapping(product2.getId(), category.getId());
+        productService.addProduct(product2, category.getId());
         
         Category categoryProduct = productService.getCategoryProduct(category.getId());
         
@@ -109,14 +133,11 @@ public class ProductServiceTest {
         
         Product product = new Product();
         product.setName("product name 1");
-        productService.addProduct(product);
+        productService.addProduct(product, category.getId());
         
         Product product2 = new Product();
         product2.setName("product name 2");
-        productService.addProduct(product2);
-        
-        productService.addMapping(product.getId(), category.getId());
-        productService.addMapping(product2.getId(), category.getId());
+        productService.addProduct(product2, category.getId());
         
         Category categoryProduct = productService.getCategoryProduct2(category.getId());
         
@@ -127,13 +148,13 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testGetProductTest() throws Exception {
+    public void testCompareProduct() throws Exception {
         
         Product product = new Product();
         product.setName("product name 1");
         productService.addProduct(product);
         
-        productService.getProductTest(product.getId());
+        productService.compareProduct(product.getId());
         
     }
 
